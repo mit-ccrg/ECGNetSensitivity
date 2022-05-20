@@ -29,7 +29,7 @@ class VCG :
 		super().__init__()
 
 		# rotational frequency
-		f = 60.0/HR
+		f = HR/60.
 		self.w = 2*np.pi*f
 
 		self.theta_x = theta_x
