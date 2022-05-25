@@ -13,7 +13,33 @@ DowerMatrix = np.array([[0.632, 0.235, -0.397, -0.434, 0.515, -0.081, -0.515, 0.
 # dictionary for lead order in output matrix after dower transformation
 Dower_lead_map = {'I':0, 'II':1, 'III':2, 'aVR':3, 'aVL':4, 'aVF':5, 'V1':6, 'V2':7, 'V3':8, 'V4':9, 'V5':10, 'V6':11}
 
+# rotation matrices. Input in degrees
+def Rx(x) : 
 
+	th_x = x*np.pi/180.
+
+	return np.array([[1, 0, 0],
+      				 [0, np.cos(th_x), -np.sin(th_x)],
+      				 [0, np.sin(th_x), np.cos(th_x)]])
+
+def Ry(y) : 
+
+	th_y = y*np.pi/180.
+
+	return np.array([[np.cos(th_y), 0, np.sin(th_y)],
+    				 [0, 1, 0],
+    				 [-np.sin(th_y), 0, np.cos(th_y)]])
+
+def Rz(z) : 
+
+	th_z = z*np.pi/180.
+
+	return np.array([[np.cos(th_z), -np.sin(th_z), 0],
+    				 [np.sin(th_z), np.cos(th_z), 0],
+    				 [0, 0, 1]])
+
+
+#TODO don't take first 10 seconds, or at least exclude the first cardiac cycle
 # solve with default parameters
 def default_vcg_solve(HR, fs=512, duration=10) :
 
@@ -27,9 +53,24 @@ def default_vcg_solve(HR, fs=512, duration=10) :
 
 	return sol.t, sol.y.T[:,1:]
 
+# solve input ode object
+def solve_vcg_object(vcg_ode, fs=512, duration=10, v0=np.array([0,.3,.3,.3])) :
+
+	tspan = np.linspace(0, duration, int(duration*fs))
+
+	sol = solve_ivp(vcg_ode.call, [tspan[0], tspan[-1]], v0, t_eval=tspan)
+
+	return sol.t, sol.y.T[:,1:]
+
+
 def convert_vcg_to_12lead(vcg) :
 
 	return vcg @ DowerMatrix
+
+
+def rotate_vcg(vcg, th_x=0, th_y=0, th_z=0) :
+
+	return (Rx(th_x) @ Ry(th_y) @ Rz(th_z) @ vcg.T).T
 
 
 # plot standard 12-lead ECG. Input must be 10s, 12 leads
