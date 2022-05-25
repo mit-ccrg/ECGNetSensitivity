@@ -28,9 +28,11 @@ class VCG :
 
 		super().__init__()
 
+		self.HR = HR
+
 		# rotational frequency
-		f = HR/60.
-		self.w = 2*np.pi*f
+		self.f = self.HR/60.
+		self.w = 2*np.pi*self.f
 
 		self.theta_x = theta_x
 		self.theta_y = theta_y
@@ -41,6 +43,12 @@ class VCG :
 		self.b_x = b_x
 		self.b_y = b_y
 		self.b_z = b_z
+
+	def set_HR(self, hr) :
+		self.HR = hr
+		# rotational frequency
+		self.f = self.HR/60.
+		self.w = 2*np.pi*self.f
 
 	def call(self, t, v) :
 
