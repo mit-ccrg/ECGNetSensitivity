@@ -122,11 +122,11 @@ def plot12(ecg, fs=512, n_squares=8) :
 		minorgrid_x = np.linspace(0.0 + 0.02*((i%4)==3) + 0.02*((i%4)==1), 10.0 + 0.02*((i%4)==3) + 0.02*((i%4)==1), int(10/.04)+1)
 
 
-		a.hlines(majorgrid_y, xmin=-1000, xmax=len(ecg)*1.1, colors='k', alpha=0.5, linewidth=0.5)
-		a.hlines(minorgrid_y, xmin=-1000, xmax=len(ecg)*1.1, colors='k', alpha=0.5, linewidth=0.3)
+		a.hlines(majorgrid_y, xmin=-1000, xmax=len(ecg)*1.1, colors='r', alpha=0.5, linewidth=0.5)
+		a.hlines(minorgrid_y, xmin=-1000, xmax=len(ecg)*1.1, colors='r', alpha=0.5, linewidth=0.3)
 
-		a.vlines(majorgrid_x, ymin=-1000, ymax=1000, colors='k', alpha=0.5, linewidth=0.5)
-		a.vlines(minorgrid_x, ymin=-1000, ymax=1000, colors='k', alpha=0.5, linewidth=0.3)
+		a.vlines(majorgrid_x, ymin=-1000, ymax=1000, colors='r', alpha=0.5, linewidth=0.5)
+		a.vlines(minorgrid_x, ymin=-1000, ymax=1000, colors='r', alpha=0.5, linewidth=0.3)
 
 		a.set_yticks([])
 		a.set_xticks([])
@@ -153,10 +153,10 @@ def plot12(ecg, fs=512, n_squares=8) :
 
 	ax_strip.set_xlim(left=0, right=10)
 	ax_strip.set_ylim(bottom=-n_squares/2, top=n_squares/2)
-	ax_strip.hlines(majorgrid_y, xmin=-1000, xmax=len(ecg)*1.1, colors='k', alpha=0.5, linewidth=0.5)
-	ax_strip.hlines(minorgrid_y, xmin=-1000, xmax=len(ecg)*1.1, colors='k', alpha=0.5, linewidth=0.3)
-	ax_strip.vlines(majorgrid_x, ymin=-1000, ymax=1000, colors='k', alpha=0.5, linewidth=0.5)
-	ax_strip.vlines(minorgrid_x, ymin=-1000, ymax=1000, colors='k', alpha=0.5, linewidth=0.3)
+	ax_strip.hlines(majorgrid_y, xmin=-1000, xmax=len(ecg)*1.1, colors='r', alpha=0.5, linewidth=0.5)
+	ax_strip.hlines(minorgrid_y, xmin=-1000, xmax=len(ecg)*1.1, colors='r', alpha=0.5, linewidth=0.3)
+	ax_strip.vlines(majorgrid_x, ymin=-1000, ymax=1000, colors='r', alpha=0.5, linewidth=0.5)
+	ax_strip.vlines(minorgrid_x, ymin=-1000, ymax=1000, colors='r', alpha=0.5, linewidth=0.3)
 
 	plt.subplots_adjust(wspace=0, hspace=0)
 
